@@ -1,0 +1,42 @@
+sample:
+  description: LVGL sample application
+  name: lvgl
+tests:
+  sample.display.lvgl.gui:
+    filter: dt_chosen_enabled("zephyr,display")
+    # flash usage varies depending on the platform, but ~200K are the bare
+    # minimum, give some room by adding 50K more. RAM usage depends largerly on
+    # the display buffer, but a minimum is also required for the system itself.
+    # ~25K seem to be sufficient for most cases, rounded to 32K.
+    min_flash: 250
+    min_ram: 32
+    harness: none
+    tags:
+      - samples
+      - display
+      - gui
+      - lvgl
+    modules:
+      - lvgl
+    integration_platforms:
+      - native_sim_64
+  sample.display.lvgl.rk055hdmipi4m:
+    # This sample is intended to test the RT1170 and RT595, which require
+    # a display shield to work with LVGL
+    min_flash: 250
+    # The minimum RAM needed for this display is actually around 8MB,
+    # but the RT595 uses external PSRAM for the display buffer
+    min_ram: 32
+    harness: none
+    tags:
+      - samples
+      - display
+      - gui
+    modules:
+      - lvgl
+    extra_args: SHIELD="rk055hdmipi4m"
+    platform_allow:
+      - mimxrt1170_evk_cm7
+      - mimxrt595_evk_cm33
+    integration_platforms:
+      - mimxrt1170_evk_cm7
