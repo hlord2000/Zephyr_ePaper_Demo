@@ -36,9 +36,11 @@ int main(void)
 		lv_task_handler();
 		k_sleep(K_MSEC(10000));
 		lv_qrcode_update(qr_code, "https://novelbits.io/", strlen("https://novelbits.io/"));
+		LOG_INF("Set QR code to https://novelbits.io/");
 
 		lv_task_handler();
 		k_sleep(K_MSEC(10000));
 		lv_qrcode_update(qr_code, "https://www.nordicsemi.com/", strlen("https://www.nordicsemi.com/"));
+		LOG_INF("Set QR code to https://www.nordicsemi.com/");
 	}
 }
